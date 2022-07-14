@@ -250,9 +250,9 @@ func runContainerWithIOBuffers(ctx context.Context, client client.CommonAPIClien
 		asyncSetupComplete(canceller)
 		return fmt.Errorf("unable to start container %s: %s", name, err)
 	}
-	timeout := 5 * time.Second
+	timeout := 5 //* time.Second
 	defer func() {
-		stopErr := client.ContainerStop(ctx, containerID, &timeout)
+		stopErr := client.ContainerStop(ctx, containerID, container.StopOptions{Timeout: &timeout})
 		if stopErr != nil {
 			log.Errorf("could not stop container %s: %s", containerID, stopErr)
 		}

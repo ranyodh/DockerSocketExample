@@ -25,6 +25,11 @@ func main() {
 
 	ctx := context.Background()
 
+	serverVersion, _ := client.ServerVersion(ctx)
+	log.Infof("Engine Version: %s", serverVersion.Version)
+	log.Infof("Server API Version: %s", serverVersion.APIVersion)
+	log.Infof("Client API Version: %s", client.ClientVersion())
+
 	if err := runContainer(ctx, client, ContainerToRun); err != nil {
 		log.Errorf("error while running container: %v", err)
 		os.Exit(1)
